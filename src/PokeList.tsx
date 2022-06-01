@@ -6,11 +6,11 @@ export interface Pokemon {
   id: string;
 }
 
-type PokeListProps = {
+export type PokeListProps = {
   pokemons: Pokemon[];
 };
 
-const PokeList = ({ pokemons }: PokeListProps) => {
+export default function PokeList({ pokemons }: PokeListProps) {
   // const index = Math.floor(Math.random() * 100);
 
   return <>
@@ -22,6 +22,4 @@ const PokeList = ({ pokemons }: PokeListProps) => {
       )}
     </ul>
   </>;
-};
-
-export default PokeList;
+}
