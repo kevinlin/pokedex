@@ -6,9 +6,9 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-      <PokeListEntry />
-      <PokeListEntry name="Bulbasaur" />
-      <PokeListEntry name="Pikachu" />
+        <PokeListEntry/>
+        <PokeListEntry name="Bulbasaur"/>
+        <PokeListEntry name="Pikachu"/>
         {/* <img src={logo} className="App-logo" alt="logo" />
         <p>
           Edit <b>this</b> <code>src/App.tsx</code> and save to reload.
@@ -20,7 +20,7 @@ function App() {
           rel="noopener noreferrer"
         >
           Learn React
-        </a>      </header>
+        </a></header>
     </div>
   );
 }
