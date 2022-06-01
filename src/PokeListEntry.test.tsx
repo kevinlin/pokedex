@@ -1,26 +1,27 @@
 import { render, screen } from '@testing-library/react';
+import { Pokemon } from './PokeList';
 import PokeListEntry from './PokeListEntry';
 
-describe('PokeListEntry', () => {
-  it('should render "Bulbasaur" with no props', () => {
-    render(<PokeListEntry/>);
+describe('PokeListEntry.tsx', () => {
+  const bulbasaur: Pokemon = {
+    "dex": 1,
+    "name": "Bulbasaur",
+    "id": "BULBASAUR",
+  };
+  const ivysaur: Pokemon = {
+    "dex": 2,
+    "name": "Ivysaur",
+    "id": "IVYSAUR",
+  }
+  const venusaur: Pokemon = {
+    "dex": 3,
+    "name": "Venusaur",
+    "id": "VENUSAUR",
+  }
 
-    expect(screen.getByText('Bulbasaur', { exact: false })).toBeInTheDocument();
-  });
-
-  it('should render the name from props', () => {
-    render(<PokeListEntry name="TestingName"/>);
-
-    expect(screen.getByText('TestingName', { exact: false })).toBeInTheDocument();
-  });
-
-  test.each([
-    [undefined, "Bulbasaur"],
-    ["Pikachu", "Pikachu"],
-    ["Alpha Acres", "Alpha Acres"],
-  ])('PokeListEntry with name: %s should render %s', (name, expected) => {
-    render(<PokeListEntry name={name}/>);
-    expect(screen.getByText(expected, { exact: false })).toBeInTheDocument();
+  test.each([bulbasaur, ivysaur, venusaur])('PokeListEntry.tsx should render pokemon: %s', (pokemon) => {
+    render(<PokeListEntry pokemon={pokemon}/>);
+    expect(screen.getByText(pokemon.name, { exact: false })).toBeInTheDocument();
   });
 
 });
