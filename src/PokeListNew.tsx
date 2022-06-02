@@ -1,16 +1,21 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { ClipLoader } from 'react-spinners';
-import usePokemon from './usePokemon';
+import usePokemonList from './usePokemonList';
 
 export default function PokeListNew() {
-  const { pokemons, error } = usePokemon();
+  const { pokemons, error } = usePokemonList();
 
   return (
     <>
       {pokemons ?
         <ul>
           {pokemons.map(
-            (pokemon) => <li key={pokemon.name} data-testid="pokeList-entry">{pokemon.name}</li>
+            (pokemon) => {
+              return <li key={pokemon.name} data-testid="pokeList-entry">
+                <Link to={"/pokemon/" + pokemon.name} className="App-link">{pokemon.name}</Link>
+              </li>
+            }
           )}
         </ul>
         : <ClipLoader color="white"/>}

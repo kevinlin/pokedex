@@ -1,20 +1,24 @@
 import { useEffect, useState } from 'react';
 
-export type usePokemonResult = {
-  pokemon?: Pokemon;
+export type usePokemonListResult = {
+  pokemons?: PokemonListEntry[];
   error?: Error;
 }
 
-export interface Pokemon {
-  id: number;
-  name: string;
-  order: number;
-  height: number;
-  weight: number;
+export interface PokemonListResponse {
+  count: number;
+  next: string;
+  previous: string;
+  results: PokemonListEntry[];
 }
 
-export default function usePokemon(name: string): usePokemonResult {
-  const [pokemon, setPokemon] = useState<Pokemon>();
+export interface PokemonListEntry {
+  name: string;
+  url: string;
+}
+
+export default function usePokemonList(): usePokemonListResult {
+  const [pokemons, setPokemons] = useState<PokemonListEntry[]>();
   const [error, setError] = useState<Error>();
 
   useEffect(() => {
@@ -23,11 +27,12 @@ export default function usePokemon(name: string): usePokemonResult {
 
     (async function () {
       try {
-        const response = await fetch('https://pokeapi.co/api/v2/pokemon/' + name, { signal });
+        const response = await fetch('https://pokeapi.co/api/v2/pokemon?limit=50', { signal });
         if (!response.ok) {
           setError(new Error('Could not fetch Pokemon data with status: ' + response.status));
         } else {
-          setPokemon(await response.json() as Pokemon);
+          const responsePayload = await response.json() as PokemonListResponse;
+          setPokemons(responsePayload.results);
         }
       } catch (err) {
         if (err instanceof Error) {
@@ -40,5 +45,5 @@ export default function usePokemon(name: string): usePokemonResult {
     return () => controller.abort();
   }, []);
 
-  return { pokemon, error };
+  return { pokemons, error };
 }
