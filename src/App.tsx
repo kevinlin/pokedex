@@ -1,14 +1,15 @@
 import React from 'react';
 import './App.css';
-import PokeList from './PokeList';
-
-const pokemons = require('pokemongo-json-pokedex/output/pokemon.json');
+import PokeListNew from './PokeListNew';
 
 function App() {
+
   return (
     <div className="App">
       <header className="App-header">
-        <PokeList pokemons={pokemons}/>
+        <PokeListNew />
+        {/*<DynamicGreeting />*/}
+        {/*<PokeList pokemons={pokemons.slice(0, 10)}/>*/}
         {/* <img src={logo} className="App-logo" alt="logo" />
         <p>
           Edit <b>this</b> <code>src/App.tsx</code> and save to reload.

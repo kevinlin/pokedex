@@ -1,9 +1,13 @@
 const NAME = 'World';
 
-function Greeting() {
-    return (
-        <div>Hello {NAME}</div>
-    );
+type GreetingPros = {
+  name?: string;
+}
+
+function Greeting({ name = "Hello World" }: GreetingPros) {
+  return (
+    <div>Hello {name} !</div>
+  );
 }
 
 export default Greeting;
